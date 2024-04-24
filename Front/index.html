@@ -2,6 +2,12 @@
 <html>
 <head>
     Explicacion fetch
+    <style>
+        th, td {
+          border:1px solid black;
+          border-style: solid;
+        }
+    </style>
 </head>
 <body>
     <h1 id="ejemplo"> Ejemplo </h1>
@@ -9,6 +15,23 @@
 
     <input id="ingresoTexto">
     <button onclick="envioPost()">Enviar al POST</button>
+    <table style="width:100%" id="table">
+        <tr>
+          <th>Company</th>
+          <th>Contact</th>
+          <th>Country</th>
+        </tr>
+        <tr>
+          <td>Alfreds Futterkiste</td>
+          <td>Maria Anders</td>
+          <td>Germany</td>
+        </tr>
+        <tr>
+          <td>Centro comercial Moctezuma</td>
+          <td>Francisco Chang</td>
+          <td>Mexico</td>
+        </tr>
+      </table>
 </body>
 <script src="dom.js">
 </script>
