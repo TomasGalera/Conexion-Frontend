@@ -117,7 +117,7 @@ app.post('/insertarPilotosXGP', async function(req, res) {
 app.put('/actualizarPiloto', async function(req, res){
 	const pilotId = req.body.piloto_ID;
 	const number = req.body.numero;
-	const result = await MySql.realizarQuery(`UPDATE Pilotos SET numero = ${number} WHERE piloto_ID = ${pilotId}`);
+	const result = await MySql.realizarQuery(`UPDATE Pilotos SET nombre = "${number}" WHERE piloto_ID = ${pilotId}`);
 	res.send('Piloto actualizado');
 })
 
