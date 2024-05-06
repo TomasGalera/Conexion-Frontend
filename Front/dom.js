@@ -2,6 +2,7 @@ async function llamadoAlBackend() {
     let tipoGet = document.getElementById("ingresoTexto").value
 
     if (tipoGet === "Pilotos") {
+        document.getElementById("table").innerHTML = ``
         //Llamo a un pedido Get del servidor
         const response = await fetch('http://localhost:3000/obtenerPilotos',{
             method:"GET",
@@ -39,6 +40,7 @@ async function llamadoAlBackend() {
             `
         }
     } else if (tipoGet === "GP") {
+        document.getElementById("table").innerHTML = ``
         const response = await fetch('http://localhost:3000/obtenerGPS',{
             method:"GET",
             headers: {
@@ -65,6 +67,7 @@ async function llamadoAlBackend() {
             `
         }
     } else if (tipoGet === "PilotosXGPS") {
+        document.getElementById("table").innerHTML = ``
         const response = await fetch('http://localhost:3000/obtenerPilotosXGPS',{
             method:"GET",
             headers: {
@@ -102,12 +105,11 @@ async function envioPost() {
     }
 
     //Envio un pedido POST con un JSON en el body
-    const response = await fetch('http://localhost:3000/nombreDelPedido',{
+    const response = fetch('http://localhost:3000/nombreDelPedido',{
         method:"POST",
         headers: {
             "Content-Type": "application/json",
           },
         body:JSON.stringify(data),
     })
-
 }
