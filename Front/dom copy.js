@@ -39,26 +39,32 @@ async function llamadoAlBackend() {
 }
 
 async function envioPost() {
-    //Armo un objeto para mandarlo como formato JSON
-    const data = {
-        nombre : document.getElementById("nombre").value,
-        apellido : document.getElementById("apellido").value,
-        escuderia : document.getElementById("escuderia").value,
-        nacionalidad : document.getElementById("nacionalidad").value,
-        nacimiento : document.getElementById("nacimiento").value,
-        numero : document.getElementById("numero").value,
-        puntos : document.getElementById("puntos").value,
-        piloto_ID : document.getElementById("id").value,
+    if (document.getElementById("nombre").value != "" || document.getElementById("apellido").value != "" || document.getElementById("escuderia").value != "" || document.getElementById("nacionalidad").value != "" || document.getElementById("nacimiento").value != "" || document.getElementById("numero").value != null || document.getElementById("puntos").value != null || document.getElementById("id").value != null){
+        //Armo un objeto para mandarlo como formato JSON
+        const data = {
+            nombre : document.getElementById("nombre").value,
+            apellido : document.getElementById("apellido").value,
+            escuderia : document.getElementById("escuderia").value,
+            nacionalidad : document.getElementById("nacionalidad").value,
+            nacimiento : document.getElementById("nacimiento").value,
+            numero : document.getElementById("numero").value,
+            puntos : document.getElementById("puntos").value,
+            piloto_ID : document.getElementById("id").value,
+        }
+    
+        //Envio un pedido POST con un JSON en el body
+        const response = await fetch('http://localhost:3000/insertarPiloto',{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json",
+              },
+            body:JSON.stringify(data)
+        })
+        const result = await response.json()
+        // document.getElementById("respuesta").innerHTML = result.message
+        alert(result.message)
+    } else {
+        alert("Completar la información")
     }
 
-    //Envio un pedido POST con un JSON en el body
-    const response = await fetch('http://localhost:3000/insertarPiloto',{
-        method:"POST",
-        headers: {
-            "Content-Type": "application/json",
-          },
-        body:JSON.stringify(data),
-    })
-
-    const result = await response
 }

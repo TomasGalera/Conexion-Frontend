@@ -77,9 +77,9 @@ app.post('/insertarPiloto', async function(req, res) {
 	if (value === undefined || value.length === 0) {
 		const result = MySql.realizarQuery(`INSERT INTO Pilotos (nombre, apellido, escuderia, numero, nacionalidad, nacimiento, puntaje_campeonato, piloto_ID)
 		VALUES ("${name}", "${lastName}", "${team}", ${number}, "${nat}", "${birth}", ${points}, ${id})`);
-		res.send('Piloto agregado a la tabla');
-	} else if (id === value[0].piloto_ID){
-		res.send('El piloto ya existe en la base de datos');
+		res.send({message: 'Piloto agregado a la tabla'});
+	} else if (id == value[0].piloto_ID){
+		res.send({message: 'El piloto ya existe en la base de datos'});
 	};
 });
 
