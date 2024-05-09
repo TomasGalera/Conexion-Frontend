@@ -90,11 +90,11 @@ app.post('/insertarGP', async function(req, res) {
 	const id = req.body.gp_ID;
 	let value = await MySql.realizarQuery(`SELECT gp_ID FROM GP WHERE gp_ID = ${id}`);
 	if (value === undefined || value.length === 0){
-		res.send('GP agregado a la tabla');
+		res.send({message:'GP agregado a la tabla'});
 		const result = MySql.realizarQuery(`INSERT INTO GP (gp_ID, nombre, fecha, pista)
 		VALUES (${id}, "${name}", "${date}", "${circuit}")`);
 	} else if (id === value[0].gp_ID) {
-		res.send('El GP ya existe en la base de datos');
+		res.send({message:'El GP ya existe en la base de datos'});
 	};
 });
 
@@ -106,26 +106,26 @@ app.post('/insertarPilotosXGP', async function(req, res) {
 	const points = req.body.puntos;
 	let value = await MySql.realizarQuery(`SELECT piloto_ID, gp_ID FROM PilotosXGP WHERE piloto_ID = ${pilotId} AND gp_ID = ${gpId}`);
 	if (value === undefined || value.length === 0){
-		res.send('Piloto por GP agregado a la tabla');
+		res.send({message:'Piloto por GP agregado a la tabla'});
 		const result = MySql.realizarQuery(`INSERT INTO PilotosXGP (piloto_ID, gp_ID, posicion, tiempo, puntos)
 		VALUES (${pilotId}, ${gpId}, ${position}, "${time}", ${points})`);
 	} else if (pilotId === value[0].piloto_ID && gpId === value[0].gp_ID){
-		res.send('El Piloto por GP ya existe en la tabla');
+		res.send({message:'El Piloto por GP ya existe en la tabla'});
 	};
 });
 
 app.put('/actualizarPiloto', async function(req, res){
 	const pilotId = req.body.piloto_ID;
 	const number = req.body.numero;
-	const result = await MySql.realizarQuery(`UPDATE Pilotos SET nombre = "${number}" WHERE piloto_ID = ${pilotId}`);
-	res.send('Piloto actualizado');
+	const result = await MySql.realizarQuery(`UPDATE Pilotos SET numero = "${number}" WHERE piloto_ID = ${pilotId}`);
+	res.send({message:'Piloto actualizado'});
 })
 
 app.put('/actualizarGP', async function(req, res){
 	const gpId = req.body.piloto_ID;
 	const date = req.body.fecha;
 	const result = await MySql.realizarQuery(`UPDATE Pilotos SET fecha = ${date} WHERE piloto_ID = ${gpId}`);
-	res.send('GP actualizado');
+	res.send({message:'GP actualizado'});
 })
 
 app.put('/actualizarPilotosXGP', async function(req, res){
@@ -133,26 +133,26 @@ app.put('/actualizarPilotosXGP', async function(req, res){
 	const gpId = req.body.gp_ID;
 	const points = req.body.puntos;
 	const result = await MySql.realizarQuery(`UPDATE PilotosXGP SET puntos = ${points} WHERE piloto_ID = ${pilotId} AND gp_ID = ${gpId}`);
-	res.send('Piloto por GP actualizado');
+	res.send({message:'Piloto por GP actualizado'});
 })
 
 app.delete('/borrarPiloto', async function(req, res){
 	const pilotId = req.body.piloto_ID;
 	const result = await MySql.realizarQuery(`DELETE FROM Pilotos WHERE piloto_ID = ${pilotId}`);
-	res.send('Piloto borrado');
+	res.send({message:'Piloto borrado'});
 })
 
 app.delete('/borrarGP', async function(req, res){
 	const gpId = req.body.gp_ID;
 	const result = await MySql.realizarQuery(`DELETE FROM GP WHERE gp_ID = ${gpId}`);
-	res.send('GP borrado');
+	res.send({message:'GP borrado'});
 })
 
 app.delete('/borrarPilotosXGP', async function(req, res){
 	const pilotId = req.body.piloto_ID;
 	const gpId = req.body.gp_ID;
 	const result = await MySql.realizarQuery(`DELETE FROM PilotosXGP WHERE piloto_ID = ${pilotId} AND gp_ID = ${gpId}`);
-	res.send('Piloto borrado');
+	res.send({message:'Piloto borrado'});
 })
 
 app.listen(port, function(){

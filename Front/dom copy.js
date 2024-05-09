@@ -39,7 +39,7 @@ async function llamadoAlBackend() {
 }
 
 async function envioPost() {
-    if (document.getElementById("nombre").value != "" || document.getElementById("apellido").value != "" || document.getElementById("escuderia").value != "" || document.getElementById("nacionalidad").value != "" || document.getElementById("nacimiento").value != "" || document.getElementById("numero").value != null || document.getElementById("puntos").value != null || document.getElementById("id").value != null){
+    if (document.getElementById("nombre").value != "" && document.getElementById("apellido").value != "" && document.getElementById("escuderia").value != "" && document.getElementById("numero").value != "" && document.getElementById("nacionalidad").value != "" && document.getElementById("nacimiento").value != "" && document.getElementById("puntos").value != "" && document.getElementById("id").value != ""){
         //Armo un objeto para mandarlo como formato JSON
         const data = {
             nombre : document.getElementById("nombre").value,
@@ -61,10 +61,55 @@ async function envioPost() {
             body:JSON.stringify(data)
         })
         const result = await response.json()
-        // document.getElementById("respuesta").innerHTML = result.message
         alert(result.message)
+        llamadoAlBackend()
     } else {
         alert("Completar la información")
     }
+    console.log(typeof document.getElementById("numero").value)
+}
 
+async function deletePiloto(){
+    if (document.getElementById("id").value != ""){
+        const data = {
+            piloto_ID : document.getElementById("id").value,
+        }
+    
+        //Envio un pedido POST con un JSON en el body
+        const response = await fetch('http://localhost:3000/borrarPiloto',{
+            method:"DELETE",
+            headers: {
+                "Content-Type": "application/json",
+              },
+            body:JSON.stringify(data)
+        })
+        const result = await response.json()
+        alert(result.message)
+        llamadoAlBackend()
+    } else {
+        alert("Completar la información")
+    }
+}
+
+async function updatePiloto(){
+    if (document.getElementById("id").value != "" && document.getElementById("numero").value != ""){
+        const data = {
+            numero: document.getElementById("numero").value,
+            piloto_ID : document.getElementById("id").value
+        }
+    
+        //Envio un pedido POST con un JSON en el body
+        const response = await fetch('http://localhost:3000/actualizarPiloto',{
+            method:"PUT",
+            headers: {
+                "Content-Type": "application/json",
+              },
+            body:JSON.stringify(data)
+        })
+        const result = await response.json()
+        alert(result.message)
+        llamadoAlBackend()
+    } else {
+        alert("Completar la información")
+    }
 }

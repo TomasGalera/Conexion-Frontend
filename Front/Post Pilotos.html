@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    Explicacion fetch
     <style>
         th, td {
           border:1px solid black;
@@ -10,8 +9,8 @@
     </style>
 </head>
 <body>
-    <h1 id="ejemplo"> Ejemplo </h1>
-    <button onclick="llamadoAlBackend()">Llamado Al Backend</button>
+    <h1>Post Pilotos</h1>
+    <button onclick="llamadoAlBackend()">Ver Tabla</button>
     <p>Nombre</p>
     <input id="nombre">
     <p>Apellido</p>
@@ -25,15 +24,14 @@
     <p>Nacimiento (AA-MM-DD)</p>
     <input id="nacimiento">
     <p>Puntos</p>
-    <input id="puntos">
+    <input id="puntos" type="number">
     <p>ID</p>
-    <input id="id">
-    <button onclick="envioPost()">Enviar al POST</button>
-    <h1 id="respuesta"></h1>
+    <input id="id" type="number">
+    <button onclick="envioPost()" style="margin: auto auto 30px auto;">Enviar al POST</button>
     <table style="width:100%" id="table">
       
     </table>
+    <script src="dom copy.js">
+    </script>
 </body>
-<script src="dom copy.js">
-</script>
 </html>
