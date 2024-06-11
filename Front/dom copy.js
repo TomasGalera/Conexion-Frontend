@@ -38,7 +38,7 @@ async function llamadoAlBackend() {
     }
 }
 
-async function envioPost() {
+async function postPiloto() {
     if (document.getElementById("nombre").value != "" && document.getElementById("apellido").value != "" && document.getElementById("escuderia").value != "" && document.getElementById("numero").value != "" && document.getElementById("nacionalidad").value != "" && document.getElementById("nacimiento").value != "" && document.getElementById("puntos").value != "" && document.getElementById("id").value != ""){
         //Armo un objeto para mandarlo como formato JSON
         const data = {
